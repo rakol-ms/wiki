@@ -2,7 +2,7 @@
 
 ## Manifests@git branch mapped to K8s cluster/namespace 
 
-### 1. What are the configuration elements to setup an on-prem k8s cluster with a git repo? 
+### i. What are the configuration elements to setup an on-prem k8s cluster with a git repo? 
 
 #### How to set up flux on your cluster? 
 
@@ -40,7 +40,7 @@ To summarize:
 
 
 
-### Can the configuration be: Git branch/folder <-> cluster, git branch/folder <-> namespace?  
+### ii. Can the configuration be: Git branch/folder <-> cluster, git branch/folder <-> namespace?  
 
 The flux configurations do not take a namespace field to figure out where to deploy the manifests paths you've just configured. So, the namespace to which you want to deploy your manifests to, should be a part of the manifests. That would mean: 
   - if you try to set up a same repo config usin different branches to the same cluster; the flux installation would override your existing one. 
@@ -48,36 +48,30 @@ The flux configurations do not take a namespace field to figure out where to dep
 
 ##### [TBD] If not, how can support for that gap added? 
 
-### Can a wildcard be used to specify branch name during configuration? Eg. dev-* 
+### iii. Can a wildcard be used to specify branch name during configuration? Eg. dev-* 
 No, flux configurations are static. They can not take wild cards as an attribute to their configuration. If they do, they'd end up falling into the case I mentioned above i.e.
 >  if you try to set up a same repo config usin different branches to the same cluster; the flux installation would override your existing one. 
 
-### How do we setup multiple namespaces to listen on changes to a specific branch? 
+### iv. How do we setup multiple namespaces to listen on changes to a specific branch? 
 You _**DO NOT**_ setup multiple namespaces to listen to changes to a specific. You create a flux configuration which listens to changes to a specific branch; that is in the `flux` namespace. You deploy to mmultiple namespaces by choosing the manifests which deploy across namespaces. 
 For instance, during my configuration I've used `--git-paths=service1/manifests,service2/manifests` where service1 creates resources in `namespace1` and service2 creates resources in `namespace2` the flux operator would listen to changes to your repo and apply all the manifests in both the folders. And that would inturn create reosources wherever specified in the manifests. 
-
 
 
 ## 1.b: Manifests@tag mapped to K8s cluster/namespace 
 
 #### Can commit tags be used to configure?  
 No. They don't have support for listening to tags, yet. There is an ongoing issue: https://github.com/fluxcd/flux/issues/2568 
-
-There is a PR in progress: https://github.com/fluxcd/flux/pull/2544 
-
-This PR would introduce a new argument to fluxctl i.e. `--git-tag` & uses this argumment in the flux-operator to listen to changes to that. 
-
+- There is a PR in progress: https://github.com/fluxcd/flux/pull/2544 
+- This PR would introduce a new argument to fluxctl i.e. `--git-tag` & uses this argumment in the flux-operator to listen to changes to that. 
  
 
 ### 1.c: Helm charts@git branch mapped to K8s cluster/namespace 
 
-Configure the K8s cluster and namespace to look for changes to helm charts package in a dev branch.  
+#### Can helm 2 and helm 3 charts both be supported for GitOps scenario via Azure Arc provided tools? 
+Yes, flux has support for both helm 2 and helm 3 charts. Here's a snapshot of their flow:
 
-Open questions to answer: 
+< insert flow > 
 
-Can helm 2 and helm 3 charts both be supported for GitOps scenario via Azure Arc provided tools? 
-
-If not, what is required to support? 
 
 # 2. Understand how deployment strategies can be configured in a GitOps scenario 
 
