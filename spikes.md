@@ -1,8 +1,6 @@
 # 1. Understand how Flux can be configured and mapped to K8s 
 
-## a: Manifests@git branch mapped to K8s cluster/namespace 
-
-Open questions to answer: 
+## Manifests@git branch mapped to K8s cluster/namespace 
 
 ### 1. What are the configuration elements to setup an on-prem k8s cluster with a git repo? 
 
@@ -29,7 +27,8 @@ Open questions to answer:
 
 4. [Optional]  Flux syncs your repo every 5 minutes. But if you want to sync it explcitly you can run `fluxctl sync --k8s-fwd-ns flux`
 
-#### What does flux config setup create
+#### What does flux config setup create?
+
 The resources yaml can be found here: [fluxctl-output.yml](resources/fluxctl-output.yml)
 To summarize:
   1. [flux] A Deployment object with this container image:  docker.io/fluxcd/flux:1.17.0
@@ -41,23 +40,32 @@ To summarize:
 
 
 
-Can the configuration be: Git branch/folder <-> cluster, git branch/folder <-> namespace?  
+### Can the configuration be: Git branch/folder <-> cluster, git branch/folder <-> namespace?  
 
-If not, how can support for that gap added? 
+The flux configurations do not take a namespace field to figure out where to deploy the manifests paths you've just configured. So, the namespace to which you want to deploy your manifests to, should be a part of the manifests. That would mean: 
+  a. if you try to set up a same repo config usin different branches to the same cluster; the flux installation would override your existing one. 
+  b. If you want to set up a repo config with different branch, then each of your branch should have changes to the manifests file declaring the namespace these resources are expected to be in; or you can use `helm` where you can configure your `Release.Namespace` during run time.
 
-Can a wildcard be used to specify branch name during configuration? Eg. dev-* 
+##### [TBD] If not, how can support for that gap added? 
 
-How do we setup multiple namespaces to listen on changes to a specific branch? 
+### Can a wildcard be used to specify branch name during configuration? Eg. dev-* 
+No, flux configurations are static. They can not take wild cards as an attribute to their configuration. If they do, they'd end up falling into the case I mentioned above i.e.
+> a. if you try to set up a same repo config usin different branches to the same cluster; the flux installation would override your existing one. 
 
-### 1.b: Manifests@tag mapped to K8s cluster/namespace 
+### How do we setup multiple namespaces to listen on changes to a specific branch? 
+You *DONT* setup multiple namespaces to listen to changes to a specific. You create a flux configuration which listens to changes to a specific branch; that is in the `flux` namespace. You deploy to mmultiple namespaces by choosing the manifests which deploy across namespaces. 
+For instance, during my configuration I've used `--git-paths=service1/manifests,service2/manifests` where service1 creates resources in `namespace1` and service2 creates resources in `namespace2` the flux operator would listen to changes to your repo and apply all the manifests in both the folders. And that would inturn create reosources wherever specified in the manifests. 
 
-Configure the K8s cluster/namespace to look for changes to manifest file with a specific git tag eg. dev-foo 
 
-Open questions to answer: 
 
-can commit tags be used to configure?  
+## 1.b: Manifests@tag mapped to K8s cluster/namespace 
 
-If not, how can support for that gap added? 
+#### Can commit tags be used to configure?  
+No. They don't have support for listening to tags, yet. There is an ongoing issue: https://github.com/fluxcd/flux/issues/2568 
+
+There is a PR in progress: https://github.com/fluxcd/flux/pull/2544 
+
+This PR would introduce a new argument to fluxctl i.e. `--git-tag` & uses this argumment in the flux-operator to listen to changes to that. 
 
  
 
