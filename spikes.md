@@ -46,7 +46,8 @@ The flux configurations do not take a namespace field to figure out where to dep
   - if you try to set up a same repo config usin different branches to the same cluster; the flux installation would override your existing one. 
   - If you want to set up a repo config with different branch, then each of your branch should have changes to the manifests file declaring the namespace these resources are expected to be in; or you can use `helm` where you can configure your `Release.Namespace` during run time.
 
-##### [TBD] If not, how can support for that gap added? 
+#### If not, how can support for that gap added? 
+Not sure if this counts as a gap, given that they have an alernative with helm inplace already. 
 
 ### iii. Can a wildcard be used to specify branch name during configuration? Eg. dev-* 
 No, flux configurations are static. They can not take wild cards as an attribute to their configuration. If they do, they'd end up falling into the case I mentioned above i.e.
