@@ -43,14 +43,14 @@ To summarize:
 ### Can the configuration be: Git branch/folder <-> cluster, git branch/folder <-> namespace?  
 
 The flux configurations do not take a namespace field to figure out where to deploy the manifests paths you've just configured. So, the namespace to which you want to deploy your manifests to, should be a part of the manifests. That would mean: 
-  a. if you try to set up a same repo config usin different branches to the same cluster; the flux installation would override your existing one. 
-  b. If you want to set up a repo config with different branch, then each of your branch should have changes to the manifests file declaring the namespace these resources are expected to be in; or you can use `helm` where you can configure your `Release.Namespace` during run time.
+  - if you try to set up a same repo config usin different branches to the same cluster; the flux installation would override your existing one. 
+  - If you want to set up a repo config with different branch, then each of your branch should have changes to the manifests file declaring the namespace these resources are expected to be in; or you can use `helm` where you can configure your `Release.Namespace` during run time.
 
 ##### [TBD] If not, how can support for that gap added? 
 
 ### Can a wildcard be used to specify branch name during configuration? Eg. dev-* 
 No, flux configurations are static. They can not take wild cards as an attribute to their configuration. If they do, they'd end up falling into the case I mentioned above i.e.
-> a. if you try to set up a same repo config usin different branches to the same cluster; the flux installation would override your existing one. 
+>  if you try to set up a same repo config usin different branches to the same cluster; the flux installation would override your existing one. 
 
 ### How do we setup multiple namespaces to listen on changes to a specific branch? 
 You *DONT* setup multiple namespaces to listen to changes to a specific. You create a flux configuration which listens to changes to a specific branch; that is in the `flux` namespace. You deploy to mmultiple namespaces by choosing the manifests which deploy across namespaces. 
