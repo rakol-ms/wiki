@@ -1,12 +1,12 @@
 # 1. Understand how Flux can be configured and mapped to K8s 
 
-### a: Manifests@git branch mapped to K8s cluster/namespace 
+## a: Manifests@git branch mapped to K8s cluster/namespace 
 
 Open questions to answer: 
 
-#### 1. What are the configuration elements to setup an on-prem k8s cluster with a git repo? 
+### 1. What are the configuration elements to setup an on-prem k8s cluster with a git repo? 
 
-How to set up flux on your cluster? 
+#### How to set up flux on your cluster? 
 
 0. In order to install flux on your on-premise cluster; you first need `fluxctl` which can be installed from [here](https://docs.fluxcd.io/en/latest/references/fluxctl.html)
 1. Create a namespace called `flux`
@@ -28,6 +28,16 @@ How to set up flux on your cluster?
   - Paste that ssh key in the above opened window. (i.e. create a new entry)
 
 4. [Optional]  Flux syncs your repo every 5 minutes. But if you want to sync it explcitly you can run `fluxctl sync --k8s-fwd-ns flux`
+
+#### What does flux config setup create
+The resources yaml can be found here: [fluxctl-output.yml](resources/fluxctl-output.yml)
+To summarize:
+  1. [flux] A Deployment object with this container image:  docker.io/fluxcd/flux:1.17.0
+  2. [memcached] A deployment with this container image: memcached:1.5.20
+  3. A service for communicating with the memcached service
+  4. A service account
+  5. A cluster role called `flux` 
+  6. A cluster role binding for the above created service account
 
 
 
