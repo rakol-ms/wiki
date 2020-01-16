@@ -1,5 +1,3 @@
-# 1. Understand how Flux can be configured and mapped to K8s 
-
 ## Manifests@git branch mapped to K8s cluster/namespace 
 
 ### i. What are the configuration elements to setup an on-prem k8s cluster with a git repo? 
@@ -66,31 +64,10 @@ No. They don't have support for listening to tags, yet. There is an ongoing issu
 - This PR would introduce a new argument to fluxctl i.e. `--git-tag` & uses this argumment in the flux-operator to listen to changes to that. 
  
 
-### 1.c: Helm charts@git branch mapped to K8s cluster/namespace 
+### c: Helm charts@git branch mapped to K8s cluster/namespace 
 
 #### Can helm 2 and helm 3 charts both be supported for GitOps scenario via Azure Arc provided tools? 
 Yes, flux has support for both helm 2 and helm 3 charts. Here's a snapshot of their flow:
 ![Flux helm operator flow](resources/flux-flow.png)
 
 
-# 2. Understand how deployment strategies can be configured in a GitOps scenario 
-
-### 2.a: manifest update rolling out to K8s clusters/namespaces 
-
-Configure 2 or more clusters to selectively (canary, blue green) apply changes when the manifest file is updated in git repo 
-
-Open questions to answer: 
-
-how can Flagger be configured in conjunction with flux to enable deployment strategies? 
-
-can flagger configuration be mapped in an Action (such as the Action described GitOps based K8s deployments) ? 
-
-how does it work (or not work) with Service Mesh integration ? 
-
-### 2.b: helm chart update rolling out to K8s clusters/namespaces 
-
-Configure 2 or more clusters to selectively (canary, blue-green) apply changes when the helm chart is updated in the git repo 
-
- Open questions to answer: 
-
-same questions as in 2.a. 
