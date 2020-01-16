@@ -1,6 +1,6 @@
-## Manifests@git branch mapped to K8s cluster/namespace 
+## a. Manifests@git branch mapped to K8s cluster/namespace 
 
-### i. What are the configuration elements to setup an on-prem k8s cluster with a git repo? 
+### i: What are the configuration elements to setup an on-prem k8s cluster with a git repo? 
 
 #### How to set up flux on your cluster? 
 
@@ -56,7 +56,7 @@ You _**DO NOT**_ setup multiple namespaces to listen to changes to a specific. Y
 For instance, during my configuration I've used `--git-paths=service1/manifests,service2/manifests` where service1 creates resources in `namespace1` and service2 creates resources in `namespace2` the flux operator would listen to changes to your repo and apply all the manifests in both the folders. And that would inturn create reosources wherever specified in the manifests. 
 
 
-## 1.b: Manifests@tag mapped to K8s cluster/namespace 
+## b: Manifests@tag mapped to K8s cluster/namespace 
 
 #### Can commit tags be used to configure?  
 No. They don't have support for listening to tags, yet. There is an ongoing issue: https://github.com/fluxcd/flux/issues/2568 
@@ -64,10 +64,8 @@ No. They don't have support for listening to tags, yet. There is an ongoing issu
 - This PR would introduce a new argument to fluxctl i.e. `--git-tag` & uses this argumment in the flux-operator to listen to changes to that. 
  
 
-### c: Helm charts@git branch mapped to K8s cluster/namespace 
+## c: Helm charts@git branch mapped to K8s cluster/namespace 
 
 #### Can helm 2 and helm 3 charts both be supported for GitOps scenario via Azure Arc provided tools? 
 Yes, flux has support for both helm 2 and helm 3 charts. Here's a snapshot of their flow:
 ![Flux helm operator flow](resources/flux-flow.png)
-
-
