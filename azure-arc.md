@@ -33,6 +33,3 @@
           ``` 
           to desired configuration setups.
           In the above example it would create a flux configuration to listen to a particular github repo.
-
-    
-2. What can flux do? 
