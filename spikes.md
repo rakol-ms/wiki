@@ -69,8 +69,7 @@ No. They don't have support for listening to tags, yet. There is an ongoing issu
 
 #### Can helm 2 and helm 3 charts both be supported for GitOps scenario via Azure Arc provided tools? 
 Yes, flux has support for both helm 2 and helm 3 charts. Here's a snapshot of their flow:
-
-< insert flow > 
+![Flux helm operator flow](resources/flux-flow.png)
 
 
 # 2. Understand how deployment strategies can be configured in a GitOps scenario 
