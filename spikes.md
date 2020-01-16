@@ -2,11 +2,34 @@
 
 ### a: Manifests@git branch mapped to K8s cluster/namespace 
 
-Configure the K8s cluster and namespace to look for changes to manifest file in a dev branch.  
-
 Open questions to answer: 
 
-What are the configuration elements to setup an on-prem k8s cluster with a git repo? 
+#### 1. What are the configuration elements to setup an on-prem k8s cluster with a git repo? 
+
+How to set up flux on your cluster? 
+
+0. In order to install flux on your on-premise cluster; you first need `fluxctl` which can be installed from [here](https://docs.fluxcd.io/en/latest/references/fluxctl.html)
+1. Create a namespace called `flux`
+2. Then using fluxctl set up a configuration like this:
+  ```sh
+     export GHUSER="YOURUSER"
+     export REPONAME="flux-get-started"
+     fluxctl install \
+     --git-user=${GHUSER} \
+     --git-email=${GHUSER}@users.noreply.github.com \
+     --git-url=git@github.com:${GHUSER}/${REPONAME} \
+     --git-path=namespaces,workloads \
+     --namespace=flux | kubectl apply -f -
+  ```
+  and then wait for flux to start.
+3. The flux pods on your cluster wouldn't have permissions to write to your repo by default. So, you'll have to get the public key of the flux service and add it to your repo's settings.
+  - navigate to `https://github.com/<user>/<reponame>/settings/keys`
+  - Get the ssh key by running `fluxctl identity --k8s-fwd-ns flux`
+  - Paste that ssh key in the above opened window. (i.e. create a new entry)
+
+4. [Optional]  Flux syncs your repo every 5 minutes. But if you want to sync it explcitly you can run `fluxctl sync --k8s-fwd-ns flux`
+
+
 
 Can the configuration be: Git branch/folder <-> cluster, git branch/folder <-> namespace?  
 
