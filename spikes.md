@@ -53,7 +53,7 @@ No, flux configurations are static. They can not take wild cards as an attribute
 >  if you try to set up a same repo config usin different branches to the same cluster; the flux installation would override your existing one. 
 
 ### How do we setup multiple namespaces to listen on changes to a specific branch? 
-You *DONT* setup multiple namespaces to listen to changes to a specific. You create a flux configuration which listens to changes to a specific branch; that is in the `flux` namespace. You deploy to mmultiple namespaces by choosing the manifests which deploy across namespaces. 
+You _**DO NOT**_ setup multiple namespaces to listen to changes to a specific. You create a flux configuration which listens to changes to a specific branch; that is in the `flux` namespace. You deploy to mmultiple namespaces by choosing the manifests which deploy across namespaces. 
 For instance, during my configuration I've used `--git-paths=service1/manifests,service2/manifests` where service1 creates resources in `namespace1` and service2 creates resources in `namespace2` the flux operator would listen to changes to your repo and apply all the manifests in both the folders. And that would inturn create reosources wherever specified in the manifests. 
 
 
