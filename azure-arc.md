@@ -8,7 +8,7 @@
 
 #### 1.b. What does the helm deployment do?
 
-  - Find the resources being created [here](https://github.com/Azure/ClusterConfigurationAgent/tree/master/azure-arc-k8sagents/charts/setupChart/templates)
+  - Find the resources being created, [here](https://github.com/Azure/ClusterConfigurationAgent/tree/master/azure-arc-k8sagents/charts/setupChart/templates)
      - Connected Cluster Agent
         - It fetches the cluster info
         - Creates resource group if doesn't exist
