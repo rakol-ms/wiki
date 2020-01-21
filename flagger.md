@@ -9,7 +9,7 @@ Testing resources:
  - isito installed on your cluster
  - This sample app: https://github.com/weaveworks/flagger/tree/master/kustomize/podinfo
  - Load testing service: https://github.com/weaveworks/flagger/tree/master/kustomize/tester
- - CRD used for configuring Canary
+ - CRD used for configuring Canary: [canary-crd.yml](resources/canary-crd.yml)
  
 Flagger takes app selectors as a parameter to figure the target, something like this:
 
