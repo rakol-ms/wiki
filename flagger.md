@@ -111,3 +111,6 @@ Looks something like this when a v2 is being promoted:
 ```
 And eventually it resets to the default state if we are promoting/rejecting the canary. 
 
+## How does it work with helm?
+It works the same way as it does with manifests. Given that flagger listens to objects and not manifests/packages. There isn't any special handling for helm as such.
+When using to deploy to your cluster using helm, you'd first configure flux with helm, and then when there are any changes to the repo, the helm chart gets installed, in turn updating the resource objects. That update ends up triggering the flagger's deployment strategy same as above.
