@@ -1,0 +1,29 @@
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: frontend
+  namespace: test
+  annotations:
+    flux.weave.works/automated: "true"
+    flux.weave.works/tag.chart-image: semver:~3.1
+spec:
+  releaseName: frontend
+  chart:
+    git: https://github.com/weaveowrks/flagger
+    ref: master
+    path: charts/podinfo
+  values:
+    image:
+      repository: stefanprodan/podinfo
+      tag: 3.1.0
+      backend: http://backend-podinfo:9898/echo
+      canary:
+        enabled: true
+        istioIngress:
+          enabled: true
+          gateway: public-gateway.istio-system.svc.cluster.local
+          host: frontend.istio.example.com
+        loadtest:
+          enabled: true
+        helmtest:
+          enabled: true
