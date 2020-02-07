@@ -21,3 +21,10 @@ If we have the manifest files, we will annotate these files with ```kubectl -f <
 ### Annotate on any usage of kubectl apply, or helm deploy commands inside the agent
 
 We have a process watcher today running inside agents, which tracks the active processes invoked. We can use this to know when one of the commands are invoked. But at the moment, we do not have the capability to access any of the data provided inside a task at the point when we encounter one of these commands. This means that we won't be able to configure kubectl, and we won't be able to invoke ```kubectl annotate```. We currently do not have a framework to securely access user service connection data from the process monitor (a global level process), so we are skipping it for now. We can revisit this later.
+
+
+### Annotations using flux
+Flux can't be configured to add annotations to the current objects being deployed. We can make a commit to the cluster repo and update the manifests with the annotations in a commit. The flux service will update the objects with the annotations. However, the pods won't be updated with these annotations, as annotations are not inherited by the pods from the parent object
+
+### Tagging images build with github pipelines
+I need some more context into this, as in azure devops pipelines we can add tags with docker build and push. In fact updating tags is necessary in the case of flux as flux reacts to update of tags in the CR to pull the image. I will continue on this
