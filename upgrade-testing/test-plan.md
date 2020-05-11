@@ -9,8 +9,8 @@ Setup 2 pods:
 
 |      Install Version      |   Operating System   | SQL Server      |
 |---------------------------|----------------------|-----------------|
-|  Azure DevOps Server 2019 |  Windows Server 2019 | SQL Server 2019 |
-|        TFS 2018           |  Windows Server 2016 | SQL Server 2017 |
+|  [Azure DevOps Server 2019](https://go.microsoft.com/fwlink/?linkid=2041267&clcid=0x409) |  Windows Server 2019 | SQL Server 2019 |
+|        [TFS 2018](https://go.microsoft.com/fwlink/?LinkId=2008534)           |  Windows Server 2016 | SQL Server 2017 |
 
 We'll setup these pods (on New VMs) and then upgrade it to 2020 to validate our upgrade scenario. 
 
