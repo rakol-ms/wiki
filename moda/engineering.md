@@ -41,5 +41,16 @@ Engineering things needed post moda service deploy
 Onboard to Sentry, looker, Lightstep in future
 
 
+### Reference PRs
+
+- [Pager duty Request](https://github.com/github/entitlements/pull/10397)
+- [Datadog request](https://github.com/github/entitlements/pull/10435)
+- [Add new Datadog monitor](https://github.com/github/datadog-monitoring/pull/1928)
+   + [Add monitor for cicd](https://github.com/github/datadog-monitoring/pull/1939)
+- [Add team to ninesapp](https://github.com/github/ninesapp/pull/1305)
+   + [Add escalation path](https://github.com/github/ninesapp/pull/1313)
+- [Datadog monitor dashboard](https://app.datadoghq.com/dashboard/k3h-5vi-ggn/githubazure-integration)
+
+
 
 
