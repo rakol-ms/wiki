@@ -8,11 +8,11 @@ Engineering things needed post moda service deploy
       
       b. export that monitor (will export all details in text)
       
-      c. Generate a teams alias nines app (https://github.com/github/ninesapp)
+      c. Generate a teams alias [nines app](https://github.com/github/ninesapp)
           - You'll need to create a regex for matching the datadog monitor pattern for redirecting to your team
           - You can onboard for slack notifications as well
       
-      d. Commit that text file in https://github.com/github/datadog-monitoring
+      d. Commit that text file in [this repo](https://github.com/github/datadog-monitoring)
       
       e. The created monitor would be deleted and then an automated immutable monitor would be created using the same spec.
       
