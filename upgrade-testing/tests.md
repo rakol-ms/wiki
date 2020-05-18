@@ -59,3 +59,7 @@ Define a gate in pre deployment conditions for a release and test the evaluation
 	
 	
 - See if "Unsecured" option is enabled in Service Connection in 2020 server
+
+
+## Service Endpoint
+Sharing Service Connection for upgrade testing  [Web View](https://microsoft.sharepoint.com/teams/ReleaseManagement/RM/_layouts/15/Doc.aspx?sourcedoc=%7B8ce2d97c-c8f4-4fb3-bb9f-eb4d99d32dde%7D&action=edit&wd=target%28Features%20test%20scenarios.one%7C8770f380-03cd-409b-a240-9b0d4457cd40%2FSharing%20Service%20Connection%20for%20upgrade%20testing%7Cbe25fb5b-9c5f-403f-9231-eaf041709776%2F%29&wdorigin=703&wdpreservelink=1)
